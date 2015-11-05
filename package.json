@@ -2,7 +2,7 @@
   "name": "djs",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/d.js",
   "scripts": {
     "build": "gulp dist",
     "test": "gulp test:ci"
