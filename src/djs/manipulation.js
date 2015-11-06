@@ -12,3 +12,11 @@ export function create(string) {
 
   return djsfy(element.cloneNode(true));
 }
+
+export function remove(node) {
+  if (node.parentNode) {
+    return node.parentNode.removeChild(node);
+  }
+
+  return null;
+}

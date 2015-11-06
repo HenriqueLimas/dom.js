@@ -1,5 +1,5 @@
 import html from '../util/html.js';
-import {create} from './create.js';
+import {create, remove} from './manipulation.js';
 import {find, findAll} from './find.js';
 
 function djs(template, ...substs) {
@@ -13,5 +13,6 @@ function djs(template, ...substs) {
 djs.create = create;
 djs.find = find;
 djs.findAll = findAll;
+djs.remove = remove;
 
 export default djs;

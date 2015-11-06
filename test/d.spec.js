@@ -54,6 +54,26 @@ describe('djs', () => {
     });
   });
 
+  describe('remove():', () => {
+    it('should remove the element from the parent.', () => {
+      let element = djs('body').create('<div id="remove-me"></div>');
+
+      expect(djs('body').find('#remove-me')).not.toBeNull();
+
+      djs.remove(element);
+
+      expect(djs('body').find('#remove-me')).toBeNull();
+    });
+
+    it('should return the old object.', () => {
+      let element = djs('body').create('<div id="remove-me"></div>');
+
+      let oldElement = djs.remove(element);
+
+      expect(oldElement).toBe(element);
+    });
+  });
+
   describe('find():', () => {
     it('should find an element in the DOM.', () => {
       let elementInTheDom = document.createElement('div');
@@ -85,10 +105,11 @@ describe('djs', () => {
 
       expect(djs.findAll('.in_the_dom')).toEqual(jasmine.any(NodeList));
 
-      firstElement.remove();
-      secondElement.remove();
+      djs.remove(firstElement);
+      djs.remove(secondElement);
     });
   });
+
 
   describe('node.find():', () => {
     it('should call the djs.find method passing the element.', () => {
@@ -131,6 +152,26 @@ describe('djs', () => {
       element.create('<h1>Created</h1>');
 
       expect(element.lastChild.textContent).toBe('Created');
+    });
+  });
+
+  describe('node.remove():', () => {
+    it('should call the djs.remove method passing the node.', () => {
+      spyOn(djs, 'remove').and.callThrough();
+
+      let element = djs('body').create('<div />');
+
+      element.remove();
+
+      expect(djs.remove).toHaveBeenCalledWith(element);
+    });
+
+    it('should return the old object.', () => {
+      let element = djs('body').create('<div id="remove-me"></div>');
+
+      let oldElement = element.remove();
+
+      expect(oldElement).toBe(element);
     });
   });
 });
