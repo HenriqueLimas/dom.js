@@ -27,3 +27,9 @@ gulp.task('scripts', function() {
     .pipe($.rename({ extname: '.min.js' }))
     .pipe(gulp.dest(src.dist_src));
 });
+
+gulp.task('babel', function() {
+  return gulp.src(src.scripts.all)
+    .pipe($.babel())
+    .pipe(gulp.dest(src.dist_src));
+});

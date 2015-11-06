@@ -11,7 +11,7 @@ let runSequence = require('run-sequence');
 gulp.task('dist:dev', (done) => {
   runSequence(
     ['clean'],
-    ['scripts'],
+    ['scripts', 'babel'],
     done
   );
 });
@@ -23,7 +23,7 @@ function dist(done) {
     ['lint'],
     ['test:ci'],
     ['clean'],
-    ['scripts'],
+    ['scripts', 'babel'],
     done
   );
 }
