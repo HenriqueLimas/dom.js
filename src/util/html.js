@@ -8,7 +8,7 @@ export default function htmlStringFromTemplateString(templateObject, ...substs) 
 
     subst = Array.isArray(subst) ? subst.join('') : subst + '';
 
-    if (lit.endsWith('$')) {
+    if (lit[lit.length-1] === '$') {
       subst = htmlEscape(subst);
       lit = lit.slice(0, -1);
     }
