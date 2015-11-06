@@ -18,6 +18,7 @@ function unit(done) {
 function ci(done) {
   return new Karma({
     configFile: __dirname + '/../karma.conf.js',
-    singleRun: true
+    singleRun: true,
+    browsers: ['PhantomJS']
   }, done).start();
 }
