@@ -1,5 +1,11 @@
-function djs(string) {
-  return djs.find(string);
+import html from './util/html.js';
+
+function djs(template, ...substs) {
+  if (typeof template === 'string') {
+    return djs.find(template);
+  } else if(Array.isArray(template)) {
+    return html(template, ...substs);
+  }
 }
 
 djs.create = (string) => {

@@ -15,6 +15,7 @@
     "babel-plugin-transform-es2015-block-scoping": "^6.0.18",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.0.18",
     "babel-plugin-transform-es2015-parameters": "^6.0.18",
+    "babel-plugin-transform-es2015-spread": "^6.0.14",
     "babelify": "^7.2.0",
     "browser-sync": "^2.9.11",
     "browserify": "^12.0.1",
