@@ -1,4 +1,4 @@
-import djs from '../src/d.js';
+import djs from '../src/djs/d.js';
 
 describe('djs', () => {
   it('should find an element in the DOM.', () => {

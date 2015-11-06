@@ -1,4 +1,4 @@
-import {default as html} from '../../src/util/html.js';
+import html from '../../src/util/html.js';
 
 describe('html', () => {
   it('should return a html string.', () => {
