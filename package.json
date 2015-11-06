@@ -1,13 +1,17 @@
 {
   "name": "djs",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "",
-  "main": "dist/index.js",
+  "main": "index.js",
   "scripts": {
     "build": "gulp dist",
     "test": "gulp test:ci"
   },
-  "author": "",
+  "author": {
+    "name": "Henrique Limas",
+    "email": "henrique.ramos.limas@gmail.com",
+    "url": "henriquelimas.github.io"
+  },
   "license": "ISC",
   "devDependencies": {
     "babel-plugin-transform-es2015-arrow-functions": "^6.0.14",
