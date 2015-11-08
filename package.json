@@ -1,5 +1,5 @@
 {
-  "name": "djs",
+  "name": "DJS",
   "version": "0.1.0",
   "description": "A JavaScript library that encapsulate DOM methods and makes more easy DOM manipulations.",
   "main": "dist/index.js",
