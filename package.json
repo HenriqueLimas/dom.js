@@ -1,10 +1,10 @@
 {
   "name": "djs",
   "version": "0.1.0",
-  "description": "",
-  "main": "index.js",
+  "description": "A JavaScript library that encapsulate DOM methods and makes more easy DOM manipulations.",
+  "main": "dist/index.js",
   "scripts": {
-    "build": "gulp dist",
+    "prepublish": "gulp dist",
     "test": "gulp test:ci"
   },
   "author": {
