@@ -12,7 +12,7 @@ This will install the DJS library files in your project's ```node_modules``` fol
 
 Refer to these files by adding a a ```<script>``` element into your HTML pages:
 ```html
-<script src="/node_modules/djs/dist/d.min.js"></script>
+<script src="node_modules/djs/dist/d.min.js"></script>
 ```
 
 ## Examples
