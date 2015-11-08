@@ -3,6 +3,18 @@
 
 A JavaScript library that encapsulate DOM methods and makes more easy DOM manipulations.
 
+## Quick start
+Run the following command in a shell:
+```bash
+npm install djs --save
+```
+This will install the DJS library files in your project's ```node_modules``` folder.
+
+Refer to these files by adding a a ```<script>``` element into your HTML pages:
+```html
+<script src="/node_modules/djs/dist/d.min.js"></script>
+```
+
 ## API
 
 ### djs(selector):
