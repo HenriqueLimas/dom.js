@@ -15,6 +15,49 @@ Refer to these files by adding a a ```<script>``` element into your HTML pages:
 <script src="/node_modules/djs/dist/d.min.js"></script>
 ```
 
+## Examples
+Creating elements:
+```html
+<body>
+  <div class="container"></div>
+  <script>
+    // find the container element using selector expression.
+    var container = djs('.container');
+    
+    // create an h1 element and append into container.
+    container.create('<h1>Hello World</h1>');
+  </script>
+</body>
+
+```
+
+Creating elements using template literal (ES2015):
+```html
+<body>
+  <div class="container"></div>
+  <script>
+    // find the container element using selector expression.
+    let container = djs('.container');
+    
+    let jedis = [
+      {name: 'Luke Skywalker'},
+      {name: 'Yoda'}
+    ];
+    
+    let jedisHtml = djs`
+      <ul>
+        ${jedis.map((jedi) => {
+          // Using $$ to escape the html.
+          return djs`<li>$${jedi.name}</li>`
+        })}
+      </ul>
+    `
+    // create the element and append into container.
+    container.create(jedisHtml);
+  </script>
+</body>
+
+```
 ## API
 
 ### djs(selector):
