@@ -6,7 +6,7 @@ A JavaScript library that encapsulate DOM methods and makes more easy DOM manipu
 ## Quick start
 Run the following command in a shell:
 ```bash
-npm install djs --save
+npm install dom.js --save
 ```
 This will install the DJS library files in your project's ```node_modules``` folder.
 
