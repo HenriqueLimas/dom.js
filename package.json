@@ -12,7 +12,7 @@
     "email": "henrique.ramos.limas@gmail.com",
     "url": "henriquelimas.github.io"
   },
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "babel-plugin-transform-es2015-arrow-functions": "^6.0.14",
     "babel-plugin-transform-es2015-block-scoped-functions": "^6.0.14",
