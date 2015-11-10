@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Dom.js by HenriqueLimas</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Dom.js</h1>
+      <h2 class="project-tagline">A little library that encapsulate DOM methods.</h2>
+      <a href="https://github.com/HenriqueLimas/djs" class="btn">View on GitHub</a>
+      <a href="https://github.com/HenriqueLimas/djs/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/HenriqueLimas/djs/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="domjs-" class="anchor" href="#domjs-" aria-hidden="true"><span class="octicon octicon-link"></span></a>Dom.js <a href="https://travis-ci.org/HenriqueLimas/djs"><img src="https://travis-ci.org/HenriqueLimas/djs.svg" alt="Build Status"></a>
+</h1>
+
+<p>A JavaScript library that encapsulate DOM methods and makes more easy DOM manipulations.</p>
+
+<h2>
+<a id="quick-start" class="anchor" href="#quick-start" aria-hidden="true"><span class="octicon octicon-link"></span></a>Quick start</h2>
+
+<p>Run the following command in a shell:</p>
+
+<div class="highlight highlight-source-shell"><pre>npm install dom.js --save</pre></div>
+
+<p>This will install the DJS library files in your project's <code>node_modules</code> folder.</p>
+
+<p>Refer to these files by adding a a <code>&lt;script&gt;</code> element into your HTML pages:</p>
+
+<div class="highlight highlight-text-html-basic"><pre>&lt;<span class="pl-ent">script</span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>node_modules/djs/dist/d.min.js<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;</pre></div>
+
+<h2>
+<a id="examples" class="anchor" href="#examples" aria-hidden="true"><span class="octicon octicon-link"></span></a>Examples</h2>
+
+<p>Creating elements:</p>
+
+<div class="highlight highlight-text-html-basic"><pre>&lt;<span class="pl-ent">body</span>&gt;
+  &lt;<span class="pl-ent">div</span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>container<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">div</span>&gt;
+<span class="pl-s1">  &lt;<span class="pl-ent">script</span>&gt;</span>
+<span class="pl-s1">    <span class="pl-c">// find the container element using selector expression.</span></span>
+<span class="pl-s1">    <span class="pl-k">var</span> container <span class="pl-k">=</span> djs(<span class="pl-s"><span class="pl-pds">'</span>.container<span class="pl-pds">'</span></span>);</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-c">// create an h1 element and append into container.</span></span>
+<span class="pl-s1">    container.create(<span class="pl-s"><span class="pl-pds">'</span>&lt;h1&gt;Hello World&lt;/h1&gt;<span class="pl-pds">'</span></span>);</span>
+<span class="pl-s1">  &lt;/<span class="pl-ent">script</span>&gt;</span>
+&lt;/<span class="pl-ent">body</span>&gt;
+</pre></div>
+
+<p>Creating elements using template literal (ES2015):</p>
+
+<div class="highlight highlight-text-html-basic"><pre>&lt;<span class="pl-ent">body</span>&gt;
+  &lt;<span class="pl-ent">div</span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>container<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">div</span>&gt;
+<span class="pl-s1">  &lt;<span class="pl-ent">script</span>&gt;</span>
+<span class="pl-s1">    <span class="pl-c">// find the container element using selector expression.</span></span>
+<span class="pl-s1">    <span class="pl-k">let</span> container <span class="pl-k">=</span> djs(<span class="pl-s"><span class="pl-pds">'</span>.container<span class="pl-pds">'</span></span>);</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-k">let</span> jedis <span class="pl-k">=</span> [</span>
+<span class="pl-s1">      {name<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>Luke Skywalker<span class="pl-pds">'</span></span>},</span>
+<span class="pl-s1">      {name<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>Yoda<span class="pl-pds">'</span></span>}</span>
+<span class="pl-s1">    ];</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-k">let</span> jedisHtml <span class="pl-k">=</span> djs<span class="pl-s"><span class="pl-pds">`</span></span></span>
+<span class="pl-s1"><span class="pl-s">      &lt;ul&gt;</span></span>
+<span class="pl-s1"><span class="pl-s">        <span class="pl-s1"><span class="pl-pse">${</span>jedis.map((<span class="pl-smi">jedi</span>)<span class="pl-k"> =&gt;</span> {</span></span></span>
+<span class="pl-s1"><span class="pl-s"><span class="pl-s1">          <span class="pl-c">// Using $$ to escape the html.</span></span></span></span>
+<span class="pl-s1"><span class="pl-s"><span class="pl-s1">          <span class="pl-k">return</span> djs<span class="pl-s"><span class="pl-pds">`</span>&lt;li&gt;$<span class="pl-s1"><span class="pl-pse">${</span>jedi.<span class="pl-c1">name</span><span class="pl-pse">}</span></span>&lt;/li&gt;<span class="pl-pds">`</span></span></span></span></span>
+<span class="pl-s1"><span class="pl-s"><span class="pl-s1">        <span class="pl-pse">}</span></span>)}</span></span>
+<span class="pl-s1"><span class="pl-s">      &lt;/ul&gt;</span></span>
+<span class="pl-s1"><span class="pl-s">    <span class="pl-pds">`</span></span></span>
+<span class="pl-s1">    <span class="pl-c">// create the element and append into container.</span></span>
+<span class="pl-s1">    container.create(jedisHtml);</span>
+<span class="pl-s1">  &lt;/<span class="pl-ent">script</span>&gt;</span>
+&lt;/<span class="pl-ent">body</span>&gt;
+</pre></div>
+
+<h2>
+<a id="api" class="anchor" href="#api" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="https://github.com/HenriqueLimas/djs#api">API</a>
+</h2>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/HenriqueLimas/djs">Dom.js</a> is maintained by <a href="https://github.com/HenriqueLimas">HenriqueLimas</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
