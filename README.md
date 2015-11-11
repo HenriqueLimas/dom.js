@@ -1,4 +1,5 @@
 
+
 # Dom.js [![Build Status](https://travis-ci.org/HenriqueLimas/dom.js.svg?branch=master)](https://travis-ci.org/HenriqueLimas/dom.js)
 
 A JavaScript library that encapsulate DOM methods and makes more easy DOM manipulations.
@@ -59,6 +60,16 @@ Creating elements using template literal (ES2015):
 
 ```
 ## API
+- [djs](#djsselector)
+  - [.find(selector)](#djsfindselector)
+  - [.findAll(selector)](#djsfindallselector)
+  - [.create(template)](#djscreatetemplate)
+  - [.remove(node)](#djsremovenode)
+- [DJS element](#djs-element)
+  - [element.find(selector)](#elementfindselector)
+  - [element.findAll(selector)](#elementfindallselector)
+  - [element.create(template)](#elementcreatetemplate)
+  - [element.remove()](#elementremove)
 
 ### djs(selector):
 ***Description*** Find an element using query selector.
