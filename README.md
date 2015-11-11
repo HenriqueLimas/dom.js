@@ -1,5 +1,5 @@
 
-# djs [![Build Status](https://travis-ci.org/HenriqueLimas/djs.svg)](https://travis-ci.org/HenriqueLimas/djs)
+# Dom.js [![Build Status](https://travis-ci.org/HenriqueLimas/dom.js.svg?branch=master)](https://travis-ci.org/HenriqueLimas/dom.js)
 
 A JavaScript library that encapsulate DOM methods and makes more easy DOM manipulations.
 
@@ -8,11 +8,11 @@ Run the following command in a shell:
 ```bash
 npm install dom.js --save
 ```
-This will install the DJS library files in your project's ```node_modules``` folder.
+This will install the DomJs library files in your project's ```node_modules``` folder.
 
 Refer to these files by adding a a ```<script>``` element into your HTML pages:
 ```html
-<script src="node_modules/djs/dist/d.min.js"></script>
+<script src="node_modules/dom.js/dist/d.min.js"></script>
 ```
 
 ## Examples
@@ -23,7 +23,7 @@ Creating elements:
   <script>
     // find the container element using selector expression.
     var container = djs('.container');
-    
+
     // create an h1 element and append into container.
     container.create('<h1>Hello World</h1>');
   </script>
@@ -38,12 +38,12 @@ Creating elements using template literal (ES2015):
   <script>
     // find the container element using selector expression.
     let container = djs('.container');
-    
+
     let jedis = [
       {name: 'Luke Skywalker'},
       {name: 'Yoda'}
     ];
-    
+
     let jedisHtml = djs`
       <ul>
         ${jedis.map((jedi) => {
@@ -68,7 +68,7 @@ Creating elements using template literal (ES2015):
 
 ***Return*** [DJS element](#djs-element) that represent an element found in the DOM.
 
-***Example***: 
+***Example***:
 ```javascript
 var element = djs('.my-class');
 ```
@@ -82,7 +82,7 @@ var element = djs('.my-class');
 
 **Return** [DJS element](#djs-element) with the element created.
 
-**Example**: 
+**Example**:
 ```javascript
 var element = djs`<h1>Hello World</h1>`;
 ```
@@ -96,7 +96,7 @@ var element = djs`<h1>Hello World</h1>`;
 
 ***Return*** [DJS element](#djs-element) that represent an element found in the DOM.
 
-***Example***: 
+***Example***:
 ```javascript
 var element = djs.find('.my-class');
 ```
@@ -110,7 +110,7 @@ var element = djs.find('.my-class');
 
 ***Return*** [NodeList](https://developer.mozilla.org/en/docs/Web/API/NodeList) that represent an element found in the DOM.
 
-***Example***: 
+***Example***:
 ```javascript
 var elements = djs.findAll('div');
 ```
@@ -124,7 +124,7 @@ var elements = djs.findAll('div');
 
 ***Return*** [DJS element](#djs-element) with the element created.
 
-***Example***: 
+***Example***:
 ```javascript
 var element = djs.create(`<h1>Hello World</h1>`);
 ```
@@ -137,7 +137,7 @@ var element = djs.create(`<h1>Hello World</h1>`);
   - ```node```([DJS element](#djs-element) | [Node](https://developer.mozilla.org/en-US/docs/Web/API/Node))
 **Return** [DJS element](#djs-element) with the element removed.
 
-***Example***: 
+***Example***:
 ```javascript
 var element = djs('body').create('<h1>Hello World</h1>');
 djs.remove(element);
@@ -156,7 +156,7 @@ djs.remove(element);
 
 ***Return*** [DJS element](#djs-element) that represent an element found in the DOM.
 
-***Example***: 
+***Example***:
 ```javascript
 var body = djs('body');
 body.find('.my-class');
@@ -171,7 +171,7 @@ body.find('.my-class');
 
 ***Return*** [NodeList](https://developer.mozilla.org/en/docs/Web/API/NodeList) that represent an element found in the DOM.
 
-***Example***: 
+***Example***:
 ```javascript
 var body = djs('body');
 body.findAll('.my-class');
@@ -186,7 +186,7 @@ body.findAll('.my-class');
 
 **Return** [DJS element](#djs-element) with the element created.
 
-***Example***: 
+***Example***:
 ```javascript
 var body = djs('body');
 body.create('<h1>Hello World</h1>');
@@ -195,10 +195,10 @@ body.create('<h1>Hello World</h1>');
 
 ### element.remove():
 **Description** Remove the element from the DOM.
- 
+
 **Return** [DJS element](#djs-element) with the element removed.
 
-***Example***: 
+***Example***:
 ```javascript
 var element = djs('body').create('<h1>Hello World</h1>');
 element.remove();
