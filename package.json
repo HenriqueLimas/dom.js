@@ -2,6 +2,10 @@
   "name": "dom.js",
   "version": "0.1.1",
   "description": "A JavaScript library that encapsulate DOM methods and makes more easy DOM manipulations.",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/HenriqueLimas/dom.js.git"
+  },
   "main": "dist/index.js",
   "scripts": {
     "prepublish": "gulp dist",
