@@ -110,7 +110,6 @@ describe('djs', () => {
     });
   });
 
-
   describe('node.find():', () => {
     it('should call the djs.find method passing the element.', () => {
       spyOn(djs, 'find');
@@ -152,6 +151,21 @@ describe('djs', () => {
       element.create('<h1>Created</h1>');
 
       expect(element.lastChild.textContent).toBe('Created');
+    });
+  });
+
+  describe('node.css():', () => {
+    it('should call the djs.css method passing the object with cssStyles.', () => {
+      spyOn(djs, 'css');
+
+      let element = djs.create('<div />');
+      let cssStyles = {
+        backgroundColor: 'red'
+      };
+
+      element.css(cssStyles);
+
+      expect(djs.css).toHaveBeenCalledWith(element, cssStyles);
     });
   });
 

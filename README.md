@@ -62,11 +62,13 @@ Creating elements using template literal (ES2015):
   - [.find(selector)](#djsfindselector)
   - [.findAll(selector)](#djsfindallselector)
   - [.create(template)](#djscreatetemplate)
+  - [.css(node, cssStyles)](#djscssnodecssstyles)
   - [.remove(node)](#djsremovenode)
 - [DJS element](#djs-element)
   - [element.find(selector)](#elementfindselector)
   - [element.findAll(selector)](#elementfindallselector)
   - [element.create(template)](#elementcreatetemplate)
+  - [element.css(cssStyles)](#elementcsscsstyles)
   - [element.remove()](#elementremove)
 
 ### djs(selector):
@@ -139,6 +141,25 @@ var element = djs.create(`<h1>Hello World</h1>`);
 ```
 <hr>
 
+### djs.css(node, cssStyles):
+***Description*** Add to an element the styles from ```cssStyles``` and prefix css properties when it needs.
+
+***Parameters***:
+  - ```node```([DJS element](#djs-element) | [Node](https://developer.mozilla.org/en-US/docs/Web/API/Node)) A node element to add css styles.
+  - ```cssStyles```(Object) A object with the [CSS Properties](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Properties_Reference) to be added.
+
+***Return*** [DJS element](#djs-element) | [Node](https://developer.mozilla.org/en-US/docs/Web/API/Node) with the element edited. Return ```null``` if it is not a valid node (```null```, ```undefined```, ```CommentNode```, ```TextNode```)
+
+***Example***:
+```javascript
+var element = djs.create(`<h1>Hello World</h1>`);
+
+djs.css(element, {
+  backgrounColor: 'red'
+});
+```
+<hr>
+
 ### djs.remove(node):
 **Description** Remove the element from the DOM.
 
@@ -199,6 +220,24 @@ body.findAll('.my-class');
 ```javascript
 var body = djs('body');
 body.create('<h1>Hello World</h1>');
+```
+<hr>
+
+### element.css(cssStyles):
+***Description*** Add to the ```element``` the styles from ```cssStyles``` and prefix css properties when it needs.
+
+***Parameters***:
+  - ```cssStyles```(Object) A object with the [CSS Properties](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Properties_Reference) to be added.
+
+***Return*** [DJS element](#djs-element) | [Node](https://developer.mozilla.org/en-US/docs/Web/API/Node) with the element edited.
+
+***Example***:
+```javascript
+var element = djs.create(`<h1>Hello World</h1>`);
+
+element.css({
+  backgrounColor: 'red'
+});
 ```
 <hr>
 

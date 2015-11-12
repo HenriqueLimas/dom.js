@@ -13,6 +13,7 @@ export default function djsfy(node) {
     return element;
   };
 
+  node.css = (cssStyles) => djs.css(node, cssStyles);
   node.remove = (nodeToRemove=node) => {
     let oldNode = djs.remove(nodeToRemove);
     node = null;

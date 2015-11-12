@@ -1,6 +1,7 @@
 import html from '../util/html.js';
 import {create, remove} from './manipulation.js';
 import {find, findAll} from './find.js';
+import {css} from './styles.js';
 
 function djs(template, ...substs) {
   if (typeof template === 'string') {
@@ -11,6 +12,7 @@ function djs(template, ...substs) {
 }
 
 djs.create = create;
+djs.css = css;
 djs.find = find;
 djs.findAll = findAll;
 djs.remove = remove;
