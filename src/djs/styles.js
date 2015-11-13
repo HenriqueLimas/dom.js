@@ -37,6 +37,48 @@ export function css(node, cssStyles) {
   return node;
 }
 
+export function addClass(node, classList) {
+  let currentClassList = node.getAttribute('class') || '';
+
+  classList = parseArray(classList) || [];
+
+  if (classList instanceof Array){
+    for (let i = 0, length = classList.length; i < length; i++) {
+      if (!classList[i].trim()) {
+        throw new SyntaxError('djs.addClass(): Empty strings are not valid class name');
+      }
+
+      if (!containsClass(currentClassList, classList[i])) {
+        currentClassList += ' ' + classList[i].trim();
+      }
+    }
+  }
+
+  node.setAttribute('class', currentClassList.trim());
+
+  return node;
+}
+
+function containsClass(classList, classToCheck) {
+  classList = parseArray(classList);
+
+  for (let i = 0, length = classList.length; i < length; i++) {
+    if (classList[i].trim() === classToCheck.trim()) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
+function parseArray(classList) {
+  if (typeof classList === 'string') {
+    classList = classList.split(' ');
+  }
+
+  return classList;
+}
+
 function getStyleWithPrefixKey({styleList, styleToCheck}) {
   if (styleToCheck in styleList) {
     return styleToCheck;

@@ -1,4 +1,4 @@
-import {css} from '../../src/djs/styles.js';
+import {css, addClass} from '../../src/djs/styles.js';
 
 describe('DJSStyles', () => {
   describe('css(node, cssStyles):', () => {
@@ -75,6 +75,63 @@ describe('DJSStyles', () => {
         };
 
         expect(css(element)).toBe(null);
+      });
+    });
+  });
+  
+  describe('addClass(node, className:)', () => {
+    it('should add the class into node.', () => {
+      let element = document.createElement('div');
+      addClass(element, 'first-class');
+
+      let assert = 'first-class';
+      expect(element.getAttribute('class')).toBe(assert);
+
+      assert +=  ' second-class';
+      addClass(element, 'second-class');
+      expect(element.getAttribute('class')).toBe(assert);
+    });
+
+    it('should does not repeat classes.', () => {
+      let element = document.createElement('div');
+      addClass(element, 'first-class');
+
+      let assert = 'first-class';
+      addClass(element, 'first-class');
+      expect(element.getAttribute('class')).toBe(assert);
+    });
+
+    it('should return the element reference.', () => {
+      let element = document.createElement('div');
+      let assert = addClass(element, 'first-class');
+
+      expect(assert).toBe(element);
+    });
+
+    describe('when pass an array', () => {
+      it('should add all the class into node.', () => {
+        let element = document.createElement('div');
+        addClass(element, ['first-class', 'second-class']);
+
+        let assert = 'first-class second-class';
+        expect(element.getAttribute('class')).toBe(assert);
+      });
+
+      it('should does not repeat classes.', () => {
+        let element = document.createElement('div');
+        addClass(element, ['first-class', 'first-class']);
+
+        let assert = 'first-class';
+        expect(element.getAttribute('class')).toBe(assert);
+      });
+    });
+
+    describe('when pass an empty string', () => {
+      it('should throw an SyntaxError', () => {
+        expect(function() {
+          let element = document.createElement('div');
+          addClass(element, '');
+        }).toThrowError('djs.addClass(): Empty strings are not valid class name');
       });
     });
   });
