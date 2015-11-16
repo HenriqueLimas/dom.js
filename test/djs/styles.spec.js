@@ -1,4 +1,4 @@
-import {css, addClass} from '../../src/djs/styles.js';
+import {css, addClass, containsClass} from '../../src/djs/styles.js';
 
 describe('DJSStyles', () => {
   describe('css(node, cssStyles):', () => {
@@ -132,6 +132,50 @@ describe('DJSStyles', () => {
           let element = document.createElement('div');
           addClass(element, '');
         }).toThrowError('djs.addClass(): Empty strings are not valid class name');
+      });
+    });
+  });
+
+  describe('containsClass(node, className)', () => {
+    describe('when the node has the class', () => {
+      it('should return true.', () => {
+        let element = document.createElement('div');
+        addClass(element, 'first-class');
+
+        expect(containsClass(element, 'first-class')).toBe(true);
+      });
+    });
+
+    describe('when the node does not have the class', () => {
+      it('should return false.', () => {
+        let element = document.createElement('div');
+        addClass(element, 'first-class');
+
+        expect(containsClass(element, 'not-valid-class')).toBe(false);
+      });
+    });
+
+    describe('when the node is empty', () => {
+      it('should throw an error.', () => {
+        expect(() => {
+          containsClass(null, 'class');
+        }).toThrowError('The element must be not empty.');
+      });
+    });
+
+    describe('when the className contains any ASCII whitespace', () => {
+      it('should throw an error.', () => {
+        expect(() => {
+          containsClass({}, 'class ');
+        }).toThrowError('The className provided (\'class \') contains HTML space characters, which are not valid.');
+      });
+    });
+
+    describe('when the className is empty', () => {
+      it('should throw an error.', () => {
+        expect(() => {
+          containsClass({}, '');
+        }).toThrowError('The className provided (\'\') must be not empty.');
       });
     });
   });

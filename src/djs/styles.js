@@ -48,7 +48,7 @@ export function addClass(node, classList) {
         throw new SyntaxError('djs.addClass(): Empty strings are not valid class name');
       }
 
-      if (!containsClass(currentClassList, classList[i])) {
+      if (!containsClassIntoList(currentClassList, classList[i])) {
         currentClassList += ' ' + classList[i].trim();
       }
     }
@@ -59,7 +59,27 @@ export function addClass(node, classList) {
   return node;
 }
 
-function containsClass(classList, classToCheck) {
+export function containsClass(node, className) {
+  if (!node) {
+    throw new Error('The element must be not empty.');
+  }
+
+  if (!className) {
+    throw new Error(`The className provided ('${className}') must be not empty.`);
+  }
+
+  if (containsWhitespaces(className)) {
+    throw new Error(`The className provided ('${className}') contains HTML space characters, which are not valid.`);
+  }
+
+  return containsClassIntoList(node.getAttribute('class'), className);
+}
+
+function containsWhitespaces(string) {
+  return string.match(/\s/);
+}
+
+function containsClassIntoList(classList, classToCheck) {
   classList = parseArray(classList);
 
   for (let i = 0, length = classList.length; i < length; i++) {
