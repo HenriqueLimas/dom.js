@@ -1,4 +1,4 @@
-import {css, addClass, containsClass} from '../../src/djs/styles.js';
+import {css, addClass, containsClass, removeClass} from '../../src/djs/styles.js';
 
 describe('DJSStyles', () => {
   describe('css(node, cssStyles):', () => {
@@ -176,6 +176,62 @@ describe('DJSStyles', () => {
         expect(() => {
           containsClass({}, '');
         }).toThrowError('The className provided (\'\') must be not empty.');
+      });
+    });
+  });
+
+  describe('removeClass(node, classToRemove)', () => {
+    it('should remove the class from the element.', () => {
+      let element = document.createElement('div');
+      addClass(element, 'class-to-remove');
+
+      expect(containsClass(element, 'class-to-remove')).toBe(true);
+
+      removeClass(element, 'class-to-remove');
+
+      expect(containsClass(element, 'class-to-remove')).toBe(false);
+    });
+
+    it('should return the element.', () => {
+      let element = document.createElement('div');
+
+      let assert = removeClass(element, 'class-to-remove');
+
+      expect(assert).toBe(element);
+    });
+
+    describe('when pass an array', () => {
+      it('should remove the class from the element.', () => {
+        let element = document.createElement('div');
+        addClass(element, 'class-to-remove');
+
+        expect(containsClass(element, 'class-to-remove')).toBe(true);
+
+        removeClass(element, ['class-to-remove']);
+
+        expect(containsClass(element, 'class-to-remove')).toBe(false);
+      });
+
+      describe('with an empty string', () => {
+        it('should throw an error.', () => {
+          expect(() => {
+            let element = document.createElement('div');
+            addClass(element, 'first-class');
+
+            removeClass(element, ['']);
+          }).toThrowError('The className provided (\'\') must be not empty.');
+        });
+      });
+
+      describe('with any ASCII whitespace', () => {
+        it('should throw an error.', () => {
+          expect(() => {
+            let element = document.createElement('div');
+            addClass(element, 'first-class');
+
+            removeClass(element, ['class ']);
+          }).toThrowError('The className provided (\'class \') contains HTML space characters, which are not valid.');
+        });
       });
     });
   });

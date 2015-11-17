@@ -64,6 +64,42 @@ export function containsClass(node, className) {
     throw new Error('The element must be not empty.');
   }
 
+  assertClassName(className);
+
+  return containsClassIntoList(node.getAttribute('class'), className);
+}
+
+export function removeClass(node, classToRemove) {
+  let currentClassList = parseArray(node.getAttribute('class')) || [];
+
+  classToRemove = parseArray(classToRemove) || [];
+
+  if (!currentClassList.length || !classToRemove.length) {
+    return node;
+  }
+
+  if (classToRemove instanceof Array) {
+    classToRemoveInteraction:
+    for(let i = 0, length = classToRemove.length; i < length; i++) {
+      let className = classToRemove[i];
+      assertClassName(className);
+
+      currentClassListInteraction:
+      for(let y = 0, length = currentClassList.length; y < length; y++) {
+        if (className === currentClassList[y]) {
+          currentClassList.splice(y, 1);
+          continue classToRemoveInteraction;
+        }
+      }
+    }
+  }
+
+  node.setAttribute('class', currentClassList.join(' '));
+
+  return node;
+}
+
+function assertClassName(className) {
   if (!className) {
     throw new Error(`The className provided ('${className}') must be not empty.`);
   }
@@ -71,8 +107,6 @@ export function containsClass(node, className) {
   if (containsWhitespaces(className)) {
     throw new Error(`The className provided ('${className}') contains HTML space characters, which are not valid.`);
   }
-
-  return containsClassIntoList(node.getAttribute('class'), className);
 }
 
 function containsWhitespaces(string) {
