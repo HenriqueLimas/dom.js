@@ -59,17 +59,31 @@ Creating elements using template literal (ES2015):
 ```
 ## API
 - [djs](#djsselector)
-  - [.find(selector)](#djsfindselector)
-  - [.findAll(selector)](#djsfindallselector)
-  - [.create(template)](#djscreatetemplate)
-  - [.css(node, cssStyles)](#djscssnodecssstyles)
-  - [.remove(node)](#djsremovenode)
+  - [Query](#query):
+    - [.find(selector)](#djsfindselector)
+    - [.findAll(selector)](#djsfindallselector)
+  - [Manipulation](#manipulation):
+    - [.create(template)](#djscreatetemplate)
+    - [.remove(node)](#djsremovenode)
+  - [Styles](#styles):
+    - [.css(node, cssStyles)](#djscssnodecssstyles)
+    - [.addClass(node, className)](#djsaddclassnodeclassname)
+    - [.removeClass(node, classToRemove)](#djsremoveclassnodeclasstoremove)
+    - [.toggleClass(node, className, force)](#djstoggleclassnodeclassnameforce)
+    - [.containsClass(node, className)](#djscontainsclassnodeclassname)
 - [DJS element](#djs-element)
-  - [element.find(selector)](#elementfindselector)
-  - [element.findAll(selector)](#elementfindallselector)
-  - [element.create(template)](#elementcreatetemplate)
-  - [element.css(cssStyles)](#elementcsscsstyles)
-  - [element.remove()](#elementremove)
+  - [Element query](#elementquery):
+    - [element.find(selector)](#elementfindselector)
+    - [element.findAll(selector)](#elementfindallselector)
+  - [Element manipulation](#elementmanipulation):
+    - [element.create(template)](#elementcreatetemplate)
+    - [element.remove()](#elementremove)
+  - [Element styles](#elementstyles):
+    - [element.css(cssStyles)](#elementcsscsstyles)
+    - [element.addClass(className)](#elementaddclassclassname)
+    - [element.removeClass(classToRemove)](#elementremoveclassclasstoremove)
+    - [element.toggleClass(className, force)](#elementtoggleclassclassnameforce)
+    - [element.containsClass(className)](#elementcontainsclassclassname)
 
 ### djs(selector):
 ***Description*** Find an element using query selector.
@@ -99,6 +113,7 @@ var element = djs`<h1>Hello World</h1>`;
 ```
 <hr>
 
+## Query
 ### djs.find(selector):
 ***Description*** Find an element using query selector.
 
@@ -127,6 +142,7 @@ var elements = djs.findAll('div');
 ```
 <hr>
 
+## Manipulation
 ### djs.create(template):
 ***Description*** Create a [DJS element](#djs-element) and return it.
 
@@ -141,6 +157,21 @@ var element = djs.create(`<h1>Hello World</h1>`);
 ```
 <hr>
 
+### djs.remove(node):
+**Description** Remove the element from the DOM.
+
+***Parameters***:
+  - ```node```([DJS element](#djs-element) | [Node](https://developer.mozilla.org/en-US/docs/Web/API/Node))
+**Return** [DJS element](#djs-element) with the element removed.
+
+***Example***:
+```javascript
+var element = djs('body').create('<h1>Hello World</h1>');
+djs.remove(element);
+```
+<hr>
+
+## Styles
 ### djs.css(node, cssStyles):
 ***Description*** Add to an element the styles from ```cssStyles``` and prefix css properties when it needs.
 
@@ -160,24 +191,84 @@ djs.css(element, {
 ```
 <hr>
 
-### djs.remove(node):
-**Description** Remove the element from the DOM.
+### djs.addClass(node, className):
+***Description*** Add to an element the CSS classes passed into ```className```.
 
 ***Parameters***:
-  - ```node```([DJS element](#djs-element) | [Node](https://developer.mozilla.org/en-US/docs/Web/API/Node))
-**Return** [DJS element](#djs-element) with the element removed.
+  - ```node```([DJS element](#djs-element) | [Node](https://developer.mozilla.org/en-US/docs/Web/API/Node)) A node element to add css classes.
+  - ```className```(String | Array) A string or array of classes to be added.
+
+***Return*** [DJS element](#djs-element) | [Node](https://developer.mozilla.org/en-US/docs/Web/API/Node) with the element edited. Return ```null``` if it is not a valid node (```null```, ```undefined```, ```CommentNode```, ```TextNode```)
 
 ***Example***:
 ```javascript
-var element = djs('body').create('<h1>Hello World</h1>');
-djs.remove(element);
+var element = djs.create(`<h1>Hello World</h1>`);
+
+djs.addClass(element, ['my-class']);
 ```
 <hr>
+
+### djs.removeClass(node, classToRemove):
+***Description*** Remove from an element the CSS class passed into ```classToRemove```.
+
+***Parameters***:
+  - ```node```([DJS element](#djs-element) | [Node](https://developer.mozilla.org/en-US/docs/Web/API/Node)) A node element to remove the css class.
+  - ```classToRemove```(String) A string of class to be removed.
+
+***Return*** [DJS element](#djs-element) | [Node](https://developer.mozilla.org/en-US/docs/Web/API/Node) with the element edited. Return ```null``` if it is not a valid node (```null```, ```undefined```, ```CommentNode```, ```TextNode```)
+
+***Example***:
+```javascript
+var element = djs.create(`<h1 class="class-to-remove">Hello World</h1>`);
+
+djs.removeClass(element, 'class-to-remove');
+```
+<hr>
+
+
+### djs.toggleClass(node, className, force):
+***Description*** Toggle the CSS class passed as ```className``` from an element.
+
+***Parameters***:
+  - ```node```([DJS element](#djs-element) | [Node](https://developer.mozilla.org/en-US/docs/Web/API/Node)) A node element to toggle the css class.
+  - ```className```(String) A string of class to be toggled.
+  - ```force```(Boolean) When is false and class is not into element, the method does not add the class. 
+                         When the class is into element and is truthy, the methdo does not remove the class.
+
+***Return*** [DJS element](#djs-element) | [Node](https://developer.mozilla.org/en-US/docs/Web/API/Node) with the element edited. Return ```null``` if it is not a valid node (```null```, ```undefined```, ```CommentNode```, ```TextNode```)
+
+***Example***:
+```javascript
+var element = djs.create(`<h1 class="class-to-remove">Hello World</h1>`);
+
+djs.toggleClass(element, 'class-to-remove');
+```
+<hr>
+
+### djs.containsClass(node, className):
+***Description*** Verify if the ````className``` is into element or not.
+
+***Parameters***:
+  - ```node```([DJS element](#djs-element) | [Node](https://developer.mozilla.org/en-US/docs/Web/API/Node)) A node element verify if it contains the css class.
+  - ```className```(String) A string of class to be checked.
+
+***Return*** (Boolean) Return ```true``` when the class is in element otherwise return false
+
+***Example***:
+```javascript
+var element = djs.create(`<h1 class="my-class">Hello World</h1>`);
+
+djs.containsClass(element, 'my-class'); // true
+```
+<hr>
+
 
 ### DJS element
 ***Description*** An DJS element is a [Node](https://developer.mozilla.org/en-US/docs/Web/API/Node) element that has also the djs methods.
 
 #### Methods
+
+## Element query
 ### element.find(selector):
 ***Description*** Find an element using query selector and ```element``` as the root node.
 
@@ -208,6 +299,7 @@ body.findAll('.my-class');
 ```
 <hr>
 
+## Element manipulation
 ### element.create(template):
 **Description** Create a [DJS element](#djs-element), return it and append into ```element```.
 
@@ -223,6 +315,20 @@ body.create('<h1>Hello World</h1>');
 ```
 <hr>
 
+### element.remove():
+**Description** Remove the element from the DOM.
+
+**Return** [DJS element](#djs-element) with the element removed.
+
+***Example***:
+```javascript
+var element = djs('body').create('<h1>Hello World</h1>');
+element.remove();
+```
+<hr>
+
+
+## Element styles
 ### element.css(cssStyles):
 ***Description*** Add to the ```element``` the styles from ```cssStyles``` and prefix css properties when it needs.
 
@@ -241,14 +347,69 @@ element.css({
 ```
 <hr>
 
-### element.remove():
-**Description** Remove the element from the DOM.
+### element.addClass(className):
+***Description*** Add to an element the CSS classes passed into ```className```.
 
-**Return** [DJS element](#djs-element) with the element removed.
+***Parameters***:
+  - ```className```(String | Array) A string or array of classes to be added.
+
+***Return*** [DJS element](#djs-element) | [Node](https://developer.mozilla.org/en-US/docs/Web/API/Node) with the element edited. Return ```null``` if it is not a valid node (```null```, ```undefined```, ```CommentNode```, ```TextNode```)
 
 ***Example***:
 ```javascript
-var element = djs('body').create('<h1>Hello World</h1>');
-element.remove();
+var element = djs.create(`<h1>Hello World</h1>`);
+
+element.addClass(['my-class']);
+```
+<hr>
+
+### element.removeClass(classToRemove):
+***Description*** Remove from an element the CSS class passed into ```classToRemove```.
+
+***Parameters***:
+  - ```classToRemove```(String) A string of class to be removed.
+
+***Return*** [DJS element](#djs-element) | [Node](https://developer.mozilla.org/en-US/docs/Web/API/Node) with the element edited. Return ```null``` if it is not a valid node (```null```, ```undefined```, ```CommentNode```, ```TextNode```)
+
+***Example***:
+```javascript
+var element = djs.create(`<h1 class="class-to-remove">Hello World</h1>`);
+
+element.removeClass('class-to-remove');
+```
+<hr>
+
+
+### element.toggleClass(className, force):
+***Description*** Toggle the CSS class passed as ```className``` from an element.
+
+***Parameters***:
+  - ```className```(String) A string of class to be toggled.
+  - ```force```(Boolean) When is false and class is not into element, the method does not add the class. 
+                         When the class is into element and is truthy, the methdo does not remove the class.
+
+***Return*** [DJS element](#djs-element) | [Node](https://developer.mozilla.org/en-US/docs/Web/API/Node) with the element edited. Return ```null``` if it is not a valid node (```null```, ```undefined```, ```CommentNode```, ```TextNode```)
+
+***Example***:
+```javascript
+var element = djs.create(`<h1 class="class-to-remove">Hello World</h1>`);
+
+element.toggleClass('class-to-remove');
+```
+<hr>
+
+### element.containsClass(className):
+***Description*** Verify if the ````className``` is into element or not.
+
+***Parameters***:
+  - ```className```(String) A string of class to be checked.
+
+***Return*** (Boolean) Return ```true``` when the class is in element otherwise return false
+
+***Example***:
+```javascript
+var element = djs.create(`<h1 class="my-class">Hello World</h1>`);
+
+element.containsClass('my-class'); // true
 ```
 <hr>
