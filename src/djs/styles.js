@@ -70,7 +70,7 @@ export function containsClass(node, className) {
 }
 
 export function removeClass(node, classToRemove) {
-  let currentClassList = parseArray(node.getAttribute('class')) || [];
+  let currentClassList = getCurrentClassList(node);
 
   classToRemove = parseArray(classToRemove) || [];
 
@@ -99,6 +99,32 @@ export function removeClass(node, classToRemove) {
   return node;
 }
 
+export function toggleClass(node, className, force) {
+  if (!node) {
+    throw new Error('The element must be not empty.');
+  }
+
+  assertClassName(className);
+
+  let currentClassList = getCurrentClassList(node);
+
+  if (containsClassIntoList(currentClassList, className)) {
+    if (!force) {
+      removeClass(node, className);
+    }
+  } else {
+    if (force !== false) {
+      addClass(node, className);
+    }
+  }
+
+  return node;
+}
+
+function getCurrentClassList(node) {
+  return parseArray(node.getAttribute('class')) || [];
+}
+
 function assertClassName(className) {
   if (!className) {
     throw new Error(`The className provided ('${className}') must be not empty.`);
@@ -114,7 +140,7 @@ function containsWhitespaces(string) {
 }
 
 function containsClassIntoList(classList, classToCheck) {
-  classList = parseArray(classList);
+  classList = parseArray(classList) || [];
 
   for (let i = 0, length = classList.length; i < length; i++) {
     if (classList[i].trim() === classToCheck.trim()) {

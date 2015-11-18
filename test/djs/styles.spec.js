@@ -1,4 +1,4 @@
-import {css, addClass, containsClass, removeClass} from '../../src/djs/styles.js';
+import {css, addClass, containsClass, removeClass, toggleClass} from '../../src/djs/styles.js';
 
 describe('DJSStyles', () => {
   describe('css(node, cssStyles):', () => {
@@ -232,6 +232,109 @@ describe('DJSStyles', () => {
             removeClass(element, ['class ']);
           }).toThrowError('The className provided (\'class \') contains HTML space characters, which are not valid.');
         });
+      });
+    });
+  });
+
+  describe('toggleClass(node, className, force)', () => {
+    describe('when the node has the class', () => {
+      const CLASS_NAME = 'first-class';
+      let element;
+
+      beforeEach(() => {
+        element = document.createElement('div');
+        addClass(element, CLASS_NAME);
+      });
+
+      it('should return the node.', () => {
+        expect(toggleClass(element, CLASS_NAME)).toBe(element);
+      });
+
+      describe('and force is falsy', () => {
+        it('should remove the class.', () => {
+          expect(containsClass(element, CLASS_NAME)).toBe(true);
+
+          toggleClass(element, CLASS_NAME);
+
+          expect(containsClass(element, CLASS_NAME)).toBe(false);
+        });
+      });
+
+      describe('and force is truthy', () => {
+        it('should not remove the class.', () => {
+          expect(containsClass(element, CLASS_NAME)).toBe(true);
+
+          toggleClass(element, CLASS_NAME, true);
+
+          expect(containsClass(element, CLASS_NAME)).toBe(true);
+        });
+      });
+    });
+
+    describe('when the node does not have the class', () => {
+      const CLASS_NAME = 'first-class';
+      let element;
+
+      beforeEach(() => {
+        element = document.createElement('div');
+      });
+
+      it('should return the node.', () => {
+        expect(toggleClass(element, CLASS_NAME)).toBe(element);
+      });
+
+      describe('and the force is false', () => {
+        it('should not add the class.', () => {
+          expect(containsClass(element, CLASS_NAME)).toBe(false);
+
+          toggleClass(element, CLASS_NAME, false);
+
+          expect(containsClass(element, CLASS_NAME)).toBe(false);
+        });
+      });
+
+      describe('and the force is undefined', () => {
+        it('should add the class.', () => {
+          expect(containsClass(element, CLASS_NAME)).toBe(false);
+
+          toggleClass(element, CLASS_NAME);
+
+          expect(containsClass(element, CLASS_NAME)).toBe(true);
+        });
+      });
+
+      describe('and the force is truthy', () => {
+        it('should add the class.', () => {
+          expect(containsClass(element, CLASS_NAME)).toBe(false);
+
+          toggleClass(element, CLASS_NAME, true);
+
+          expect(containsClass(element, CLASS_NAME)).toBe(true);
+        });
+      });
+    });
+
+    describe('when the node is empty', () => {
+      it('should throw an error.', () => {
+        expect(() => {
+          toggleClass(null, 'class');
+        }).toThrowError('The element must be not empty.');
+      });
+    });
+
+    describe('when the className contains any ASCII whitespace', () => {
+      it('should throw an error.', () => {
+        expect(() => {
+          toggleClass({}, 'class ');
+        }).toThrowError('The className provided (\'class \') contains HTML space characters, which are not valid.');
+      });
+    });
+
+    describe('when the className is empty', () => {
+      it('should throw an error.', () => {
+        expect(() => {
+          toggleClass({}, '');
+        }).toThrowError('The className provided (\'\') must be not empty.');
       });
     });
   });
