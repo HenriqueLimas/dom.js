@@ -72,13 +72,13 @@ Creating elements using template literal (ES2015):
     - [.toggleClass(node, className, force)](#djstoggleclassnodeclassnameforce)
     - [.containsClass(node, className)](#djscontainsclassnodeclassname)
 - [DJS element](#djs-element)
-  - [Element query](#elementquery):
+  - [Element query](#element-query):
     - [element.find(selector)](#elementfindselector)
     - [element.findAll(selector)](#elementfindallselector)
-  - [Element manipulation](#elementmanipulation):
+  - [Element manipulation](#element-manipulation):
     - [element.create(template)](#elementcreatetemplate)
     - [element.remove()](#elementremove)
-  - [Element styles](#elementstyles):
+  - [Element styles](#element-styles):
     - [element.css(cssStyles)](#elementcsscsstyles)
     - [element.addClass(className)](#elementaddclassclassname)
     - [element.removeClass(classToRemove)](#elementremoveclassclasstoremove)
