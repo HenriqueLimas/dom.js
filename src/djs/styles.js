@@ -1,3 +1,5 @@
+import djsfy from './djsfy';
+
 // Edge / IE
 const MS = 'ms';
 // Chrome / Safari
@@ -34,7 +36,7 @@ export function css(node, cssStyles) {
     }
   }
 
-  return node;
+  return djsfy(node);
 }
 
 export function addClass(node, classList) {
@@ -56,7 +58,7 @@ export function addClass(node, classList) {
 
   node.setAttribute('class', currentClassList.trim());
 
-  return node;
+  return djsfy(node);
 }
 
 export function containsClass(node, className) {
@@ -75,7 +77,7 @@ export function removeClass(node, classToRemove) {
   classToRemove = parseArray(classToRemove) || [];
 
   if (!currentClassList.length || !classToRemove.length) {
-    return node;
+    return djsfy(node);
   }
 
   if (classToRemove instanceof Array) {
@@ -96,7 +98,7 @@ export function removeClass(node, classToRemove) {
 
   node.setAttribute('class', currentClassList.join(' '));
 
-  return node;
+  return djsfy(node);
 }
 
 export function toggleClass(node, className, force) {
@@ -118,7 +120,7 @@ export function toggleClass(node, className, force) {
     }
   }
 
-  return node;
+  return djsfy(node);
 }
 
 function getCurrentClassList(node) {
