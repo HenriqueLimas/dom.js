@@ -1,4 +1,5 @@
 import djs from '../src/djs/d.js';
+import * as styles from '../src/djs/styles.js';
 
 describe('djs', () => {
   it('should find an element in the DOM.', () => {
@@ -110,6 +111,36 @@ describe('djs', () => {
     });
   });
 
+  describe('css(node, cssStyles)', () => {
+    it('should be the same method "css" from the styles module.', () => {
+      expect(djs.css).toBe(styles.css);
+    });
+  });
+
+  describe('addClass(node, classList)', () => {
+    it('should be the same method "addClass" from the styles module.', () => {
+      expect(djs.addClass).toBe(styles.addClass);
+    });
+  });
+
+  describe('removeClass(node, classList)', () => {
+    it('should be the same method "removeClass" from the styles module.', () => {
+      expect(djs.removeClass).toBe(styles.removeClass);
+    });
+  });
+
+  describe('toggleClass(node, classList)', () => {
+    it('should be the same method "toggleClass" from the styles module.', () => {
+      expect(djs.toggleClass).toBe(styles.toggleClass);
+    });
+  });
+
+  describe('containsClass(node, classList)', () => {
+    it('should be the same method "containsClass" from the styles module.', () => {
+      expect(djs.containsClass).toBe(styles.containsClass);
+    });
+  });
+
   describe('node.find():', () => {
     it('should call the djs.find method passing the element.', () => {
       spyOn(djs, 'find');
@@ -166,6 +197,59 @@ describe('djs', () => {
       element.css(cssStyles);
 
       expect(djs.css).toHaveBeenCalledWith(element, cssStyles);
+    });
+  });
+
+  describe('node.addClass():', () => {
+    it('should call the djs.addClass method passing the object with classList.', () => {
+      spyOn(djs, 'addClass');
+
+      let element = djs.create('<div />');
+      let classList = ['first-class'];
+
+      element.addClass(classList);
+
+      expect(djs.addClass).toHaveBeenCalledWith(element, classList);
+    });
+  });
+
+  describe('node.removeClass():', () => {
+    it('should call the djs.removeClass method passing the object with classToRemove.', () => {
+      spyOn(djs, 'removeClass');
+
+      let element = djs.create('<div />');
+      let classToRemove = 'class-to-remove';
+
+      element.removeClass(classToRemove);
+
+      expect(djs.removeClass).toHaveBeenCalledWith(element, classToRemove);
+    });
+  });
+
+  describe('node.toggleClass():', () => {
+    it('should call the djs.toggleClass method passing the object with classToRemove.', () => {
+      spyOn(djs, 'toggleClass');
+
+      let element = djs.create('<div />');
+      let className = 'first-class';
+      let force = true;
+
+      element.toggleClass(className, force);
+
+      expect(djs.toggleClass).toHaveBeenCalledWith(element, className, force);
+    });
+  });
+
+  describe('node.containsClass():', () => {
+    it('should call the djs.containsClass method passing the object with classToRemove.', () => {
+      spyOn(djs, 'containsClass');
+
+      let element = djs.create('<div />');
+      let className = 'first-class';
+
+      element.containsClass(className);
+
+      expect(djs.containsClass).toHaveBeenCalledWith(element, className);
     });
   });
 

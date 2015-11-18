@@ -14,6 +14,10 @@ export default function djsfy(node) {
   };
 
   node.css = (cssStyles) => djs.css(node, cssStyles);
+  node.addClass = (classList) => djs.addClass(node, classList);
+  node.removeClass = (classToRemove) => djs.removeClass(node, classToRemove);
+  node.toggleClass = (className, force) => djs.toggleClass(node, className, force);
+  node.containsClass = (className) => djs.containsClass(node, className);
   node.remove = (nodeToRemove=node) => {
     let oldNode = djs.remove(nodeToRemove);
     node = null;
