@@ -1,6 +1,6 @@
 {
   "name": "dom.js",
-  "version": "0.1.4",
+  "version": "0.2.0",
   "description": "A JavaScript library that encapsulate DOM methods and makes more easy DOM manipulations.",
   "repository": {
     "type": "git",
