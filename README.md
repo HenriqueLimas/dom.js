@@ -100,16 +100,18 @@ var element = djs('.my-class');
 <hr>
 
 ### djs\`template\`:
-**Description** Create a [DJS element](#djs-element) and return it.
+**Description** Generate a HTMLTemplate string and return it.
 
 **Parameters**:
-  - ```template``` (Template Literal): A HTML Template Literal that represent an element to create.
+  - ```template``` (Template Literal): A HTML Template Literal that represent a string to be generated.
 
-**Return** [DJS element](#djs-element) with the element created.
+**Return** String that represent the HTMLTemplate.
 
 **Example**:
 ```javascript
-var element = djs`<h1>Hello World</h1>`;
+var htmlTemplate = djs`<h1>Hello World</h1>`;
+
+djs.create(htmlTemplate);
 ```
 <hr>
 
